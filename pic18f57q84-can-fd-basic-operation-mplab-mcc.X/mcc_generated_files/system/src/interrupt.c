@@ -7,11 +7,11 @@
  * 
  * @brief This file contains the API implementation for the Interrupt Manager driver.
  * 
- * @version Interrupt Manager Driver Version 2.12
+ * @version Interrupt Manager Driver Version 2.1.3
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+? [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -60,7 +60,6 @@ void  INTERRUPT_Initialize (void)
     GIE = state;
     // Assign peripheral interrupt priority vectors
     IPR0bits.CANIP = 1;
-    IPR0bits.IOCIP = 1;
     IPR3bits.TMR0IP = 1;
     IPR4bits.CANRXIP = 1;
 
@@ -94,10 +93,6 @@ void __interrupt(irq(default),base(8)) Default_ISR()
 {
 }
 
-void __interrupt(irq(IOC), base(8)) IOC_ISR()
-{
-    PIN_MANAGER_IOC();
-}
 
 
 /**

@@ -10,7 +10,7 @@
  * @version TMR0 Driver Version 2.1.1
 */
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+? [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -36,34 +36,38 @@
 
 volatile uint16_t timerTMR0ReloadVal16bit;
 
-const struct TMR_INTERFACE timer0 = {
-    .Initialize = Timer0_Initialize,
-    .Start = Timer0_Start,
-    .Stop = Timer0_Stop,
-    .PeriodCountSet = Timer0_PeriodCountSet,
-    .TimeoutCallbackRegister = Timer0_OverflowCallbackRegister,
+const struct TMR_INTERFACE Timer0 = {
+    .Initialize = TMR0_Initialize,
+    .Start = TMR0_Start,
+    .Stop = TMR0_Stop,
+    .PeriodCountSet = TMR0_PeriodCountSet,
+    .TimeoutCallbackRegister = TMR0_OverflowCallbackRegister,
     .Tasks = NULL
 };
 
-static void (*Timer0_OverflowCallback)(void);
-static void Timer0_DefaultOverflowCallback(void);
+static void (*TMR0_OverflowCallback)(void);
+static void TMR0_DefaultOverflowCallback(void);
 
-void Timer0_Initialize(void)
-{
+/**
+  Section: TMR0 APIs
+*/ 
+
+void TMR0_Initialize(void){
+
     //TMR0H 194; 
     TMR0H = 0xC2;
 
     //TMR0L 247; 
     TMR0L = 0xF7;
 
-    //T0CS HFINTOSC; T0CKPS 1:256; T0ASYNC synchronised; 
-    T0CON1 = 0x68;
+    //T0CS HFINTOSC; T0CKPS 1:256; T0ASYNC not_synchronised; 
+    T0CON1 = 0x78;
 
     //Load TMRTMR0 value to the 16-bit reload variable
     timerTMR0ReloadVal16bit = ((uint16_t)TMR0H << 8) | TMR0L;
 
     //Set default callback for TMR0 overflow interrupt
-    Timer0_OverflowCallbackRegister(Timer0_DefaultOverflowCallback);
+    TMR0_OverflowCallbackRegister(TMR0_DefaultOverflowCallback);
 
     //Clear Interrupt flag before enabling the interrupt
     PIR3bits.TMR0IF = 0;
@@ -75,17 +79,17 @@ void Timer0_Initialize(void)
     T0CON0 = 0x90;
 }
 
-void Timer0_Start(void)
+void TMR0_Start(void)
 {
     T0CON0bits.T0EN = 1;
 }
 
-void Timer0_Stop(void)
+void TMR0_Stop(void)
 {
     T0CON0bits.T0EN = 0;
 }
 
-uint16_t Timer0_Read(void)
+uint16_t TMR0_Read(void)
 {
     uint16_t readVal;
     uint8_t readValLow;
@@ -98,24 +102,24 @@ uint16_t Timer0_Read(void)
     return readVal;
 }
 
-void Timer0_Write(size_t timerVal)
+void TMR0_Write(size_t timerVal)
 {
     TMR0H = timerVal >> 8;
     TMR0L = (uint8_t) timerVal;
 }
 
-void Timer0_Reload(void)
+void TMR0_Reload(void)
 {
     TMR0H = timerTMR0ReloadVal16bit >> 8;
     TMR0L = (uint8_t) timerTMR0ReloadVal16bit;
 }
 
-void Timer0_PeriodCountSet(size_t periodVal)
+void TMR0_PeriodCountSet(size_t periodVal)
 {
    timerTMR0ReloadVal16bit = (uint16_t) periodVal;
 }
 
-void __interrupt(irq(TMR0),base(8)) Timer0_OverflowISR()
+void __interrupt(irq(TMR0),base(8)) TMR0_OverflowISR()
 {
     //Clear the TMR0 interrupt flag
     PIR3bits.TMR0IF = 0;
@@ -123,20 +127,20 @@ void __interrupt(irq(TMR0),base(8)) Timer0_OverflowISR()
     TMR0H = timerTMR0ReloadVal16bit >> 8;
     TMR0L = (uint8_t) timerTMR0ReloadVal16bit;
 
-    if(Timer0_OverflowCallback)
+    if(TMR0_OverflowCallback)
     {
-        Timer0_OverflowCallback();
+        TMR0_OverflowCallback();
     }
 }
 
-void Timer0_OverflowCallbackRegister(void (* CallbackHandler)(void))
+void TMR0_OverflowCallbackRegister(void (* CallbackHandler)(void))
 {
-    Timer0_OverflowCallback = CallbackHandler;
+    TMR0_OverflowCallback = CallbackHandler;
 }
 
-static void Timer0_DefaultOverflowCallback(void)
+static void TMR0_DefaultOverflowCallback(void)
 {
     //Add your interrupt code here or
-    //Use Timer0_OverflowCallbackRegister function to use Custom ISR
+    //Use TMR0_OverflowCallbackRegister function to use Custom ISR
 }
 

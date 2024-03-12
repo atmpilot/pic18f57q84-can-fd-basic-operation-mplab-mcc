@@ -11,7 +11,7 @@
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+? [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -37,7 +37,7 @@
 void CLOCK_Initialize(void)
 {
     // Set the CLOCK CONTROL module to the options selected in the user interface.
-    //NDIV 1; NOSC EXTOSC   with 4x PLL; 
+    //NDIV 1; NOSC EXTOSC with 4x PLL; 
     OSCCON1 = 0x20;
     //SOSCPWR Low power; CSWHOLD may proceed; 
     OSCCON3 = 0x0;
@@ -52,6 +52,10 @@ void CLOCK_Initialize(void)
     //FSCMFEV detected; FSCMFFI enabled; FSCMPEV detected; FSCMPFI enabled; FSCMSEV detected; FSCMSFI enabled; 
     FSCMCON = 0x0;
 
+    //Wait for PLL to stabilize
+    while( OSCSTATbits.PLLR == 0)
+    {
+}
 }
 /**
  End of File

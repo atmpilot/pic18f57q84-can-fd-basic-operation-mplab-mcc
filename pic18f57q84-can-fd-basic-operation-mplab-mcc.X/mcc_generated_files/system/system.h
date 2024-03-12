@@ -7,11 +7,13 @@
  * 
  * @brief This is the generated header file for the System driver.
  *
- * @version Driver Version 1.0.1
+ * @version Driver Version 1.0.2
+ *
+ * @version Package Version 1.0.3
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+? [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -46,8 +48,7 @@
 
 /**
  * @ingroup systemdriver
- * @brief Initializes the system module.
- * This routine is called only once during system initialization, before calling other APIs.
+ * @brief Initializes the system module. This is called only once before calling other APIs.
  * @param None.
  * @return None.
 */

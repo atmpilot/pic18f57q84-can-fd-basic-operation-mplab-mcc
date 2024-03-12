@@ -12,7 +12,7 @@
 */
 
 /*
-© [2023] Microchip Technology Inc. and its subsidiaries.
+? [2024] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -101,11 +101,11 @@ void PIN_MANAGER_Initialize(void)
     INLVLx registers
     */
     INLVLA = 0xFF;
-    INLVLB = 0xF6;
+    INLVLB = 0xFF;
     INLVLC = 0xFF;
     INLVLD = 0xFF;
     INLVLE = 0xF;
-    INLVLF = 0xF7;
+    INLVLF = 0xFF;
 
    /**
     RxyI2C | RxyFEAT registers   
