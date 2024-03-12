@@ -11,8 +11,8 @@ This example's functionality includes periodically transmitting CAN frames on 1s
 Configuring the PIC18 CAN FD Module found in [TB3266 - Basic Configuration of the PIC18 CAN FD Module](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/ProductBrief/90003266A.pdf)
 
 ## Software Used
-- [MPLAB X IDE 6.0.5](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-fd-basic-operation-mplab-mcc&utm_bu=MCU08) or newer 
-- [MPLAB XC8 2.41.0]((https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-fd-basic-operation-mplab-mcc&utm_bu=MCU08)) or newer compiler
+- [MPLAB X IDE 6.2.0](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-fd-basic-operation-mplab-mcc&utm_bu=MCU08) or newer 
+- [MPLAB XC8 2.46]((https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-fd-basic-operation-mplab-mcc&utm_bu=MCU08)) or newer compiler
 
 ## Hardware Used
 
@@ -42,8 +42,7 @@ From there, click "Select MCC Melody" and finish. You will be met with the appli
 3. Pull up its configuration window on the right where the parameters can be changed.
 
  When ready, click the **Generate** button (yellow) to generate the application code.
-
-![MCC Configuration Image](images/application_builder.png)
+<img width="1121" alt="image" src="https://github.com/atmpilot/pic18f57q84-can-fd-basic-operation-mplab-mcc/assets/20182981/cc9bbaed-f6aa-4fea-ae3d-19310fc81ea6">
 
 ### Project Configuration
 Before configuring CAN, change these other configuration settings. Configure the "Clock Control" module to use the external 10 MHz crystal oscillator, then the internal Phase-Locked Loop (PLL) to get an operating frequency of 40 MHz. As mentioned in [TB3266](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/ProductBrief/90003266A.pdf), 10 MHz, 20 MHz or 40 MHz are the CAN FD hardware supported speeds.
